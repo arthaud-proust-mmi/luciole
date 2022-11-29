@@ -4,10 +4,8 @@ using UnityEngine;
 
 public abstract class AbstractBoss : AbstractCharacter
 {
-    protected int Phase = 0;
-    protected bool CanAttack = true;
-    protected int AttackDelayInSeconds;
-    
+    protected int Phase = 1;
+
     protected abstract void RandomMove();
     protected abstract void RandomAttack();
     
@@ -26,44 +24,42 @@ public abstract class AbstractBoss : AbstractCharacter
         base.Update();
     }
 
-    public void NextPhase()
+    public void LooseHp(int hpCountToLoose)
     {
-        Phase++;
-    }
-
-    public void LooseHp(int hpCount)
-    {
-        HealthPoints -= hpCount;
+        if (IsDead())
+        {
+            return;
+        }
+        
+        HealthPoints -= hpCountToLoose;
+        
         if (IsDead())
         {
             HandleDeath();
         }
         else
         {
-            NextPhaseIfUnderHalfLife();
+            HandleHpLost();
+            PhaseTwoIfUnderHalfLife();
         }
     }
 
-    protected void NextPhaseIfUnderHalfLife()
+    protected void PhaseTwoIfUnderHalfLife()
     {
-        if (HealthPoints < MaxHealthPoints / 2)
+        if (Phase == 1 && HealthPoints < MaxHealthPoints / 2)
         {
-            NextPhase();
+            Phase = 2;
+            Debug.Log("Phase 2 started");
         }
     }
 
-    protected override void HandleDeath()
+    protected void HandleHpLost()
     {
+        Debug.Log(HealthPoints);
     }
     
-    protected void HandleAttackDone()
+    protected override void HandleDeath()
     {
-        CanAttack = false;
-        StartCoroutine(ApplyAttackDelay());
-    }
-    IEnumerator ApplyAttackDelay()
-    {
-        yield return new WaitForSeconds(AttackDelayInSeconds);
-        CanAttack = true;
+        Debug.Log("Boss dead");
     }
 }

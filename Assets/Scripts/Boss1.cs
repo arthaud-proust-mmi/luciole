@@ -8,14 +8,14 @@ public class Boss1 : AbstractBoss
     protected Boss1()
     {
         AttackDelayInSeconds = 5;
-        MaxHealthPoints = 200;
+        MaxHealthPoints = 200f;
     }
     
     new void Awake()
     {
         base.Awake();
     }
-    
+
     new void Start()
     {
         base.Start();
@@ -30,26 +30,23 @@ public class Boss1 : AbstractBoss
 
     protected override void RandomMove()
     {
-        
     }
     
     protected override void RandomAttack()
     {
-        if (!CanAttack)
+        if (CanAttack)
         {
-            return;
+            if (Random.value < 0.5f)
+            {
+                PrimaryAttack();
+            }
+            else
+            {
+                SecondaryAttack();
+            }
+
+            HandleAttackDone();
         }
-        
-        if (Random.value < 0.5f)
-        {
-            PrimaryAttack();
-        }
-        else
-        {
-            SecondaryAttack();
-        }
-        
-        HandleAttackDone();
     }
 
     public void PrimaryAttack()

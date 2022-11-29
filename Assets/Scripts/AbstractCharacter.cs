@@ -4,9 +4,12 @@ using UnityEngine;
 
 public abstract class AbstractCharacter : AbstractSprite
 {
-    protected int HealthPoints;
-    protected int MaxHealthPoints;
+    protected float HealthPoints;
+    protected float MaxHealthPoints;
     protected float JumpHeight;
+    
+    protected bool CanAttack = true;
+    protected int AttackDelayInSeconds;
     
     [SerializeField] private LayerMask groundLayer;
 
@@ -62,5 +65,16 @@ public abstract class AbstractCharacter : AbstractSprite
     public bool IsDead()
     {
         return HealthPoints <= 0;
+    }
+    
+    protected void HandleAttackDone()
+    {
+        CanAttack = false;
+        StartCoroutine(ApplyAttackDelay());
+    }
+    IEnumerator ApplyAttackDelay()
+    {
+        yield return new WaitForSeconds(AttackDelayInSeconds);
+        CanAttack = true;
     }
 }
