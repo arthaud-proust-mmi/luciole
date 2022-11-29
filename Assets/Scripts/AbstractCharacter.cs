@@ -11,7 +11,7 @@ public abstract class AbstractCharacter : AbstractSprite
     protected bool CanAttack = true;
     protected int AttackDelayInSeconds;
     
-    [SerializeField] private LayerMask groundLayer;
+    private LayerMask m_GroundLayer;
 
     private Rigidbody2D m_Rb2D;
     private readonly float m_BottomHitDistance = 1f;
@@ -20,6 +20,7 @@ public abstract class AbstractCharacter : AbstractSprite
 
     public void Awake()
     {
+        m_GroundLayer = LayerMask.GetMask("Ground");
         m_Rb2D = GetComponent<Rigidbody2D>();
         ResetLife();
     }
@@ -56,7 +57,7 @@ public abstract class AbstractCharacter : AbstractSprite
             transform.position, 
             Vector2.down, 
             m_BottomHitDistance,
-            groundLayer
+            m_GroundLayer
         );
 
         return hitDown.collider;
