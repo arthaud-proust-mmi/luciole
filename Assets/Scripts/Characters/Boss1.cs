@@ -58,8 +58,16 @@ namespace Characters
 
         public void PrimaryAttack()
         {
-            var projectile =
-                GameObject.Instantiate(chocWavePrefab, transform.position, chocWavePrefab.transform.rotation);
+            Vector3 projectilePosition = new Vector3(
+                transform.position.x,
+                0.5f,
+                transform.position.z
+            );
+            var projectile = GameObject.Instantiate(
+                    chocWavePrefab, 
+                    projectilePosition, 
+                    chocWavePrefab.transform.rotation
+                    );
         }
 
         public void SecondaryAttack()
