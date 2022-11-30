@@ -16,7 +16,7 @@ namespace Characters
         {
             PrimaryAttackPoints = 1f;
             SecondaryAttackPoints = 0.5f;
-            AttackDelayInSeconds = 5;
+            AttackDelayInSeconds = 5f;
             MaxHealthPoints = 200f;
         }
 

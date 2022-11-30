@@ -20,7 +20,7 @@ public abstract class AbstractSprite : MonoBehaviour
         
     }
     
-    void Move(Vector3 directionVector)
+    public void Move(Vector3 directionVector)
     {
         transform.position += Time.deltaTime * MovingSpeed * directionVector;
     }

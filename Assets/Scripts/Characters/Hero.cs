@@ -13,11 +13,12 @@ namespace Characters
 
         protected Hero()
         {
+            MovingSpeed = 5f;
+            JumpForce = 6f;
             ShortRangeAttackPoints = 20f;
             LongRangeAttackPoints = 5f;
+            AttackDelayInSeconds = 1f;
             MaxHealthPoints = 6f;
-            JumpHeight = 7f;
-            AttackDelayInSeconds = 0;
         }
 
         new void Awake()
@@ -35,9 +36,28 @@ namespace Characters
         {
             base.Update();
 
+            CheckMove();
+            CheckAttack();
+        }
+
+        void CheckAttack()
+        {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Attack();
+            }
+        }
+
+        void CheckMove()
+        {
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                Move(Vector3.right);
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                Move(Vector3.left);
             }
         }
 

@@ -22,10 +22,10 @@ public abstract class AbstractCharacter : AbstractSprite
         }
     }
     protected float MaxHealthPoints;
-    protected float JumpHeight;
+    protected float JumpForce;
     
     protected bool CanAttack = true;
-    protected int AttackDelayInSeconds;
+    protected float AttackDelayInSeconds;
     
     private LayerMask m_GroundLayer;
 
@@ -47,6 +47,7 @@ public abstract class AbstractCharacter : AbstractSprite
     public new void Start()
     {
         base.Start();
+        HandleAttackDone();
     }
 
     public new void Update()
@@ -81,7 +82,7 @@ public abstract class AbstractCharacter : AbstractSprite
     {
         if (IsHittingDown())
         {
-            m_Rb2D.velocity = Vector2.up * JumpHeight;
+            m_Rb2D.velocity = Vector2.up * JumpForce;
         }
     }
 
