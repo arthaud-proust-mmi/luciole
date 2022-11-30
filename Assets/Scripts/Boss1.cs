@@ -7,6 +7,8 @@ public class Boss1 : AbstractBoss
 {
     protected float PrimaryAttackPoints;
     protected float SecondaryAttackPoints;
+
+    public GameObject ChocWavePrefab;
     
     protected Boss1()
     {
@@ -57,6 +59,8 @@ public class Boss1 : AbstractBoss
 
     public void PrimaryAttack()
     {
+        var projectile = GameObject.Instantiate(ChocWavePrefab, transform.position, ChocWavePrefab.transform.rotation);
+        
         hero.LooseHp(PrimaryAttackPoints);
     }
     
