@@ -14,8 +14,6 @@ namespace Prefabs
         public override void AffectTargetCharacter(AbstractCharacter character)
         {
             character.LooseHp(2f);
-            
-            Destroy(gameObject);
         }
     }
 }

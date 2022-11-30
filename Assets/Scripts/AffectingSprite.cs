@@ -36,6 +36,11 @@ public abstract class AffectingSprite: AbstractSprite
         {
             HandleTriggerWithCharacter(col);
         }
+        
+        if (col.gameObject.layer == LayerMask.NameToLayer("Walls"))
+        {
+            HandleTriggerWithWall(col);
+        }
     }
     
     private void HandleTriggerWithCharacter(Collider2D col)
@@ -45,5 +50,10 @@ public abstract class AffectingSprite: AbstractSprite
         {
             AffectTargetCharacter(character);
         } 
+    }
+
+    private void HandleTriggerWithWall(Collider2D col)
+    {
+        Destroy(gameObject);
     }
 }
