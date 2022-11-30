@@ -7,7 +7,8 @@ namespace Characters
     public class Hero : AbstractCharacter
     {
         protected float ShortRangeAttackPoints;
-        protected float LongRangeAttackPoints;
+        
+        public GameObject flowerPrefab;
 
         public Boss1 boss1;
 
@@ -16,8 +17,7 @@ namespace Characters
             MovingSpeed = 5f;
             JumpForce = 6f;
             ShortRangeAttackPoints = 20f;
-            LongRangeAttackPoints = 5f;
-            AttackDelayInSeconds = 1f;
+            AttackDelayInSeconds = 0.5f;
             MaxHealthPoints = 6f;
         }
 
@@ -42,9 +42,14 @@ namespace Characters
 
         void CheckAttack()
         {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                ShortRangeAttack();
+            }
+            
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Attack();
+                LongRangeAttack();
             }
         }
 
@@ -61,23 +66,56 @@ namespace Characters
             }
         }
 
-        protected void Attack()
-        {
-            if (CanAttack)
-            {
-                boss1.LooseHp(ShortRangeAttackPoints);
-                HandleAttackDone();
-            }
-        }
-
         protected void ShortRangeAttack()
         {
+            if (!CanAttack)
+            {
+                return;
+            }
 
+            var hitGameObjectList = Physics2D.CircleCastAll(
+                transform.position,
+                3f,
+                Vector2.zero
+            );
+
+            foreach (var hitGameObject in hitGameObjectList)
+            {
+                var characterHit = hitGameObject.collider.gameObject.GetComponent<AbstractCharacter>();
+
+                if (!characterHit)
+                {
+                    continue;
+                }
+
+                if (characterHit.GetType().Name == "Hero")
+                {
+                    continue;
+                }
+                
+                characterHit.LooseHp(ShortRangeAttackPoints);
+            }
+
+            HandleAttackDone();
         }
 
         protected void LongRangeAttack()
         {
+            if (!CanAttack)
+            {
+                return;
+            }
+            
+            var halfSpriteHeight = SpriteRenderer.bounds.size.y/2;
+            var topSpritePosition = transform.position + (Vector3.up * halfSpriteHeight);
 
+            var projectile = GameObject.Instantiate(
+                flowerPrefab, 
+                topSpritePosition, 
+                flowerPrefab.transform.rotation
+            );
+
+            HandleAttackDone();
         }
     }
 }

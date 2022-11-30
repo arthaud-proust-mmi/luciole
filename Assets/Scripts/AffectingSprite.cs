@@ -7,6 +7,9 @@ using UnityEngine;
 public abstract class AffectingSprite: AbstractSprite
 {
     public Vector2 startingVelocity;
+    public bool destroyOnWall = false;
+    public bool destroyOnGround = false;
+
     private Rigidbody2D m_Rb2D;
 
     public abstract bool IsCharacterATarget(AbstractCharacter character);
@@ -37,9 +40,13 @@ public abstract class AffectingSprite: AbstractSprite
             HandleTriggerWithCharacter(col);
         }
         
-        if (col.gameObject.layer == LayerMask.NameToLayer("Walls"))
+        if (
+            (destroyOnWall && col.gameObject.layer == LayerMask.NameToLayer("Walls"))
+        ||
+            (destroyOnGround && col.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        )
         {
-            HandleTriggerWithWall(col);
+            Destroy(gameObject);
         }
     }
     
@@ -50,10 +57,5 @@ public abstract class AffectingSprite: AbstractSprite
         {
             AffectTargetCharacter(character);
         } 
-    }
-
-    private void HandleTriggerWithWall(Collider2D col)
-    {
-        Destroy(gameObject);
     }
 }

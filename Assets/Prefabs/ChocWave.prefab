@@ -212,6 +212,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingVelocity: {x: -10, y: 0}
+  destroyOnWall: 1
+  destroyOnGround: 0
 --- !u!50 &2214496894937849783
 Rigidbody2D:
   serializedVersion: 4
