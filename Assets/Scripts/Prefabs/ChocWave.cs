@@ -6,7 +6,7 @@ namespace Prefabs
 {
     public class ChocWave: AffectingSprite
     {
-        public override bool ShouldAffectCharacter(AbstractCharacter character)
+        public override bool IsCharacterATarget(AbstractCharacter character)
         {
             return character.GetType().Name == "Hero";
         }
@@ -14,6 +14,8 @@ namespace Prefabs
         public override void AffectTargetCharacter(AbstractCharacter character)
         {
             character.LooseHp(2f);
+            
+            Destroy(gameObject);
         }
     }
 }

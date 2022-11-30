@@ -37,8 +37,14 @@ public abstract class AbstractBoss : AbstractCharacter
         }
     }
     
-    public new void HandleHpLost()
+    protected override void HandleHpLost()
     {
         PhaseTwoIfUnderHalfLife();
+    }
+    
+    protected override void HandleDeath()
+    {
+        Destroy(gameObject);
+        Destroy(hpText);
     }
 }

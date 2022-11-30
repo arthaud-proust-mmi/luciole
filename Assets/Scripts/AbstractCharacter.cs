@@ -56,8 +56,6 @@ public abstract class AbstractCharacter : AbstractSprite
         }
     }
 
-
-    
     public void LooseHp(float hpCountToLoose)
     {
         if (IsDead())
@@ -77,7 +75,7 @@ public abstract class AbstractCharacter : AbstractSprite
         }
     }
 
-    private void Jump()
+    public void Jump()
     {
         if (IsHittingDown())
         {
@@ -107,13 +105,13 @@ public abstract class AbstractCharacter : AbstractSprite
         return HealthPoints <= 0;
     }
     
-    protected void HandleHpLost()
+    protected virtual void HandleHpLost()
     {
         string className = GetType().Name;
         Debug.LogWarning($"Character {className} lost HP (now at {HealthPoints}), not Handled");
     }
     
-    protected void HandleDeath()
+    protected virtual void HandleDeath()
     {
         string className = GetType().Name;
         Debug.LogWarning($"Character {className} dead, not handled");

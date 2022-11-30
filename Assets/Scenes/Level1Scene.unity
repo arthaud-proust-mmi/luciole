@@ -910,7 +910,7 @@ GameObject:
   - component: {fileID: 1988382652}
   - component: {fileID: 1988382651}
   - component: {fileID: 1988382655}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Hero
   m_TagString: Hero
   m_Icon: {fileID: 0}

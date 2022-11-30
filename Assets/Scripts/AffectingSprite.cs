@@ -9,7 +9,7 @@ public abstract class AffectingSprite: AbstractSprite
     public Vector2 startingVelocity;
     private Rigidbody2D m_Rb2D;
 
-    public abstract bool ShouldAffectCharacter(AbstractCharacter character);
+    public abstract bool IsCharacterATarget(AbstractCharacter character);
 
     public abstract void AffectTargetCharacter(AbstractCharacter character);
 
@@ -32,10 +32,18 @@ public abstract class AffectingSprite: AbstractSprite
 
     public void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.gameObject.layer == LayerMask.NameToLayer("Characters"))
+        {
+            HandleTriggerWithCharacter(col);
+        }
+    }
+    
+    private void HandleTriggerWithCharacter(Collider2D col)
+    {
         var character = col.gameObject.GetComponent<AbstractCharacter>();
-        if (ShouldAffectCharacter(character))
+        if (IsCharacterATarget(character))
         {
             AffectTargetCharacter(character);
-        }
+        } 
     }
 }

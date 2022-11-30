@@ -17,7 +17,7 @@ namespace Characters
             LongRangeAttackPoints = 5f;
             MaxHealthPoints = 6f;
             JumpHeight = 7f;
-            AttackDelayInSeconds = 1;
+            AttackDelayInSeconds = 0;
         }
 
         new void Awake()
