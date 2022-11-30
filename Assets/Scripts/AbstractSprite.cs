@@ -5,8 +5,17 @@ using UnityEngine;
 public abstract class AbstractSprite : MonoBehaviour
 {
     protected float MovingSpeed = 1f;
+
+    public void Awake()
+    {
+    }
+
+    public void Start()
+    {
+        
+    }
     
-    void Start()
+    public void Update()
     {
         
     }

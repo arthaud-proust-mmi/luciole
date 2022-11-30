@@ -34,20 +34,22 @@ public abstract class AbstractCharacter : AbstractSprite
 
     public TMP_Text hpText; 
     
-    public void Awake()
+    public new void Awake()
     {
+        base.Awake();
         m_GroundLayer = LayerMask.GetMask("Ground");
         m_Rb2D = GetComponent<Rigidbody2D>();
         ResetLife();
     }
     
-    public void Start()
+    public new void Start()
     {
-        
+        base.Start();
     }
 
-    public void Update()
+    public new void Update()
     {
+        base.Update();
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();

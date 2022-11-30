@@ -6,7 +6,7 @@ public abstract class AbstractBoss : AbstractCharacter
 {
     protected int Phase = 1;
 
-    public Hero hero;
+    public Characters.Hero hero;
     
 
     protected abstract void RandomMove();

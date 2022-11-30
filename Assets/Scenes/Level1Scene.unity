@@ -763,7 +763,7 @@ GameObject:
   - component: {fileID: 752657586}
   - component: {fileID: 752657585}
   - component: {fileID: 752657584}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boss1
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -784,6 +784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpText: {fileID: 481521773}
   hero: {fileID: 1988382655}
+  chocWavePrefab: {fileID: 8395283893142899863, guid: 7f29f2dde0a06476f95effab079ab777, type: 3}
 --- !u!50 &752657585
 Rigidbody2D:
   serializedVersion: 4
@@ -909,7 +910,7 @@ GameObject:
   - component: {fileID: 1988382652}
   - component: {fileID: 1988382651}
   - component: {fileID: 1988382655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hero
   m_TagString: Hero
   m_Icon: {fileID: 0}

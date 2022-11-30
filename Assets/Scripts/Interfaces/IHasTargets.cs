@@ -4,7 +4,7 @@ namespace Interfaces
 {
     public interface IHasTargets
     {
-        public abstract List<int> GetTargets();
-        public abstract List<int> GetCollidingTargets();
+        public abstract List<AbstractCharacter> GetTargets();
+        public abstract List<AbstractCharacter> GetCollidingTargets();
     }
 }
