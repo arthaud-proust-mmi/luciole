@@ -5,8 +5,13 @@ using UnityEngine.XR;
 
 public class Boss1 : AbstractBoss
 {
+    protected float PrimaryAttackPoints;
+    protected float SecondaryAttackPoints;
+    
     protected Boss1()
     {
+        PrimaryAttackPoints = 1f;
+        SecondaryAttackPoints = 0.5f;
         AttackDelayInSeconds = 5;
         MaxHealthPoints = 200f;
     }
@@ -36,6 +41,7 @@ public class Boss1 : AbstractBoss
     {
         if (CanAttack)
         {
+            Debug.Log("Attack hero");
             if (Random.value < 0.5f)
             {
                 PrimaryAttack();
@@ -51,11 +57,11 @@ public class Boss1 : AbstractBoss
 
     public void PrimaryAttack()
     {
-        Debug.Log("primary attack");
+        hero.LooseHp(PrimaryAttackPoints);
     }
     
     public void SecondaryAttack()
     {
-        Debug.Log("secondary attack");
+        hero.LooseHp(SecondaryAttackPoints);
     }
 }

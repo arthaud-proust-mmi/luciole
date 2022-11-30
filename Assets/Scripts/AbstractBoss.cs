@@ -6,12 +6,16 @@ public abstract class AbstractBoss : AbstractCharacter
 {
     protected int Phase = 1;
 
+    public Hero hero;
+    
+
     protected abstract void RandomMove();
     protected abstract void RandomAttack();
     
     new void Awake()
     {
         base.Awake();
+        // Hero = GameObject.FindWithTag("Hero").GetComponent<Hero>();
     }
     
     new void Start()
@@ -24,27 +28,7 @@ public abstract class AbstractBoss : AbstractCharacter
         base.Update();
     }
 
-    public void LooseHp(int hpCountToLoose)
-    {
-        if (IsDead())
-        {
-            return;
-        }
-        
-        HealthPoints -= hpCountToLoose;
-        
-        if (IsDead())
-        {
-            HandleDeath();
-        }
-        else
-        {
-            HandleHpLost();
-            PhaseTwoIfUnderHalfLife();
-        }
-    }
-
-    protected void PhaseTwoIfUnderHalfLife()
+    private void PhaseTwoIfUnderHalfLife()
     {
         if (Phase == 1 && HealthPoints < MaxHealthPoints / 2)
         {
@@ -52,14 +36,9 @@ public abstract class AbstractBoss : AbstractCharacter
             Debug.Log("Phase 2 started");
         }
     }
-
-    protected void HandleHpLost()
-    {
-        Debug.Log(HealthPoints);
-    }
     
-    protected override void HandleDeath()
+    public new void HandleHpLost()
     {
-        Debug.Log("Boss dead");
+        PhaseTwoIfUnderHalfLife();
     }
 }

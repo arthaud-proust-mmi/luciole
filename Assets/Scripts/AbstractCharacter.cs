@@ -1,10 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class AbstractCharacter : AbstractSprite
 {
-    protected float HealthPoints;
+    private float _healthPoints;
+    public float HealthPoints
+    {
+        get
+        {
+            return _healthPoints;
+        }
+
+        set
+        {
+            _healthPoints = value;
+            
+            string className = GetType().Name;
+            hpText.SetText($"{className} HP: {_healthPoints}");
+        }
+    }
     protected float MaxHealthPoints;
     protected float JumpHeight;
     
@@ -15,9 +31,9 @@ public abstract class AbstractCharacter : AbstractSprite
 
     private Rigidbody2D m_Rb2D;
     private readonly float m_BottomHitDistance = 1f;
-    
-    protected abstract void HandleDeath();
 
+    public TMP_Text hpText; 
+    
     public void Awake()
     {
         m_GroundLayer = LayerMask.GetMask("Ground");
@@ -35,6 +51,27 @@ public abstract class AbstractCharacter : AbstractSprite
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
+        }
+    }
+
+
+    
+    public void LooseHp(float hpCountToLoose)
+    {
+        if (IsDead())
+        {
+            return;
+        }
+        
+        HealthPoints -= hpCountToLoose;
+        
+        if (IsDead())
+        {
+            HandleDeath();
+        }
+        else
+        {
+            HandleHpLost();
         }
     }
 
@@ -66,6 +103,18 @@ public abstract class AbstractCharacter : AbstractSprite
     public bool IsDead()
     {
         return HealthPoints <= 0;
+    }
+    
+    protected void HandleHpLost()
+    {
+        string className = GetType().Name;
+        Debug.LogWarning($"Character {className} lost HP (now at {HealthPoints}), not Handled");
+    }
+    
+    protected void HandleDeath()
+    {
+        string className = GetType().Name;
+        Debug.LogWarning($"Character {className} dead, not handled");
     }
     
     protected void HandleAttackDone()
