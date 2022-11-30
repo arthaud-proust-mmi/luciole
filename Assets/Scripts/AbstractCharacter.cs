@@ -29,8 +29,9 @@ public abstract class AbstractCharacter : AbstractSprite
     
     private LayerMask m_GroundLayer;
 
+    private SpriteRenderer m_SpriteRenderer;
     private Rigidbody2D m_Rb2D;
-    private readonly float m_BottomHitDistance = 1f;
+    private readonly float m_BottomHitDistance = 0.1f;
 
     public TMP_Text hpText; 
     
@@ -38,6 +39,7 @@ public abstract class AbstractCharacter : AbstractSprite
     {
         base.Awake();
         m_GroundLayer = LayerMask.GetMask("Ground");
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_Rb2D = GetComponent<Rigidbody2D>();
         ResetLife();
     }
@@ -90,8 +92,11 @@ public abstract class AbstractCharacter : AbstractSprite
     
     public bool IsHittingDown()
     {
+        var halfSpriteHeight = m_SpriteRenderer.bounds.size.y/2;
+        var bottomSpritePosition = transform.position + (Vector3.down * halfSpriteHeight);
+        
         RaycastHit2D hitDown = Physics2D.Raycast(
-            transform.position, 
+            bottomSpritePosition, 
             Vector2.down, 
             m_BottomHitDistance,
             m_GroundLayer
