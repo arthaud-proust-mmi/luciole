@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Characters
 {
@@ -48,6 +49,11 @@ namespace Characters
                 boss1.LooseHp(ShortRangeAttackPoints);
                 HandleAttackDone();
             }
+        }
+
+        protected override void HandleDeath()
+        {
+            SceneManager.LoadScene("GameLost");
         }
 
         protected void ShortRangeAttack()

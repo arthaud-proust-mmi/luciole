@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Level1Scene.unity
+    path: Assets/Scenes/Levels/Level1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/victoire.unity
-    guid: 8c90b6a4e78714e6bb8c0e71ec6199c2
+  - enabled: 1
+    path: Assets/Scenes/Screens/GameWon.unity
+    guid: 0d2bf9ffc10a04180af427d2a37d69d3
+  - enabled: 1
+    path: Assets/Scenes/Screens/GameLost.unity
+    guid: 8366f0dc1f8f244bea857e3be3c3ccff
   m_configObjects: {}
