@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Characters
 {
@@ -64,6 +65,11 @@ namespace Characters
             {
                 Move(Vector3.left);
             }
+        }
+
+        protected override void HandleDeath()
+        {
+            SceneManager.LoadScene("GameLost");
         }
 
         protected void ShortRangeAttack()
