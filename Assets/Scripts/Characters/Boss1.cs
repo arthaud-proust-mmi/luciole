@@ -9,9 +9,8 @@ namespace Characters
     public class Boss1 : AbstractBoss
     {
         public GameObject chocWavePrefab;
-        public GameObject fallingDecorationPrefab;
+        public GameObject stalactitePrefab;
 
-        
         private bool m_IsJumpingToPrimaryAttack = false;
 
         protected Boss1()
@@ -44,20 +43,21 @@ namespace Characters
         {
         }
 
-        protected void Attack()
+        private void Attack()
         {
-            if (CanAttack)
+            if (!CanAttack)
             {
-                Debug.Log("Attack hero");
-                PrimaryAttack();
-
-                if(Phase == 2)
-                {
-                    SecondaryAttack();
-                }
-
-                HandleAttackDone();
+                return;
             }
+
+            PrimaryAttack();
+
+            if(Phase == 2)
+            {
+                SecondaryAttack();
+            }
+
+            HandleAttackDone();
         }
 
         private void PrimaryAttack()
@@ -81,7 +81,7 @@ namespace Characters
             
             Vector3 projectilePosition = new Vector3(
                 transform.position.x,
-                1f,
+                0f,
                 transform.position.z
             );
             
@@ -99,7 +99,7 @@ namespace Characters
             {
                 var randomY = Random.Range(11.0f, 14.0f);
 
-                GenerateFallingDecorationAtPosition(new Vector3(
+                GenerateStalactiteAtPosition(new Vector3(
                     x,
                     randomY,
                     0f
@@ -107,12 +107,12 @@ namespace Characters
             }
         }
 
-        private void GenerateFallingDecorationAtPosition(Vector3 projectilePosition)
+        private void GenerateStalactiteAtPosition(Vector3 projectilePosition)
         {
             GameObject.Instantiate(
-                fallingDecorationPrefab, 
+                stalactitePrefab, 
                 projectilePosition, 
-                fallingDecorationPrefab.transform.rotation
+                stalactitePrefab.transform.rotation
             ); 
         }
 

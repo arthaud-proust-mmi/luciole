@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Prefabs
 {
-    public class FallingDecoration: AffectingSprite
+    public class Stalactite: AffectingSprite
     {
         private const float FallingDecorationDamage = 0.5f;
         

@@ -19,7 +19,7 @@ namespace Characters
         protected Hero()
         {
             MovingSpeed = 5f;
-            JumpForce = 6.5f;
+            JumpForce = 6f;
             ShortRangeAttackPoints = 20f;
             AttackDelayInSeconds = 0.5f;
             MaxHealthPoints = 6f;

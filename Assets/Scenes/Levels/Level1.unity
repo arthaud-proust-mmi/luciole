@@ -1016,7 +1016,7 @@ MonoBehaviour:
   hpText: {fileID: 481521773}
   hero: {fileID: 1988382655}
   chocWavePrefab: {fileID: 8395283893142899863, guid: 7f29f2dde0a06476f95effab079ab777, type: 3}
-  fallingDecorationPrefab: {fileID: 1027349540856774795, guid: 44f20463a0e254b269c6b7e03db6b243, type: 3}
+  stalactitePrefab: {fileID: 1027349540856774795, guid: 44f20463a0e254b269c6b7e03db6b243, type: 3}
 --- !u!50 &752657585
 Rigidbody2D:
   serializedVersion: 4
