@@ -10,7 +10,6 @@ public abstract class AbstractBoss : AbstractCharacter
     
 
     protected abstract void RandomMove();
-    protected abstract void RandomAttack();
     
     new void Awake()
     {
@@ -28,7 +27,7 @@ public abstract class AbstractBoss : AbstractCharacter
         base.Update();
     }
 
-    private void PhaseTwoIfUnderHalfLife()
+    private void BeginPhaseTwoIfUnderHalfLife()
     {
         if (Phase == 1 && HealthPoints < MaxHealthPoints / 2)
         {
@@ -39,7 +38,7 @@ public abstract class AbstractBoss : AbstractCharacter
     
     protected override void HandleHpLost()
     {
-        PhaseTwoIfUnderHalfLife();
+        BeginPhaseTwoIfUnderHalfLife();
     }
     
     protected override void HandleDeath()

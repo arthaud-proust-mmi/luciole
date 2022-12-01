@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace Prefabs
 {
-    public class ChocWave: AffectingSprite
+    public class FallingDecoration: AffectingSprite
     {
-        private const float ChocWaveDamage = 1f;
+        private const float FallingDecorationDamage = 0.5f;
+        
         public override bool IsCharacterATarget(AbstractCharacter character)
         {
             return character.GetType().Name == "Hero";
@@ -14,7 +15,9 @@ namespace Prefabs
 
         public override void AffectTargetCharacter(AbstractCharacter character)
         {
-            character.LooseHp(ChocWaveDamage);
+            character.LooseHp(FallingDecorationDamage);
+
+            Destroy(gameObject);
         }
     }
 }

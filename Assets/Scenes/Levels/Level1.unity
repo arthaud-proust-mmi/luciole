@@ -1016,6 +1016,7 @@ MonoBehaviour:
   hpText: {fileID: 481521773}
   hero: {fileID: 1988382655}
   chocWavePrefab: {fileID: 8395283893142899863, guid: 7f29f2dde0a06476f95effab079ab777, type: 3}
+  fallingDecorationPrefab: {fileID: 1027349540856774795, guid: 44f20463a0e254b269c6b7e03db6b243, type: 3}
 --- !u!50 &752657585
 Rigidbody2D:
   serializedVersion: 4
@@ -1823,3 +1824,5 @@ MonoBehaviour:
   hpText: {fileID: 220266936}
   flowerPrefab: {fileID: 6918548076063735438, guid: d2f81ffed3a0d48d198d4f1181ae3cd8, type: 3}
   boss1: {fileID: 752657584}
+  canShortRangeAttack: 1
+  canLongRangeAttack: 0
