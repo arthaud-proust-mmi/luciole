@@ -68,12 +68,12 @@ namespace Characters
         
         void CheckAttack()
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.C))
             {
                 ShortRangeAttack();
             }
             
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.V))
             {
                 LongRangeAttack();
             }
