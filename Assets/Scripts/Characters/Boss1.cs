@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR;
+using Random = UnityEngine.Random;
 
 namespace Characters
 {
@@ -15,7 +17,7 @@ namespace Characters
 
         protected Boss1()
         {
-            JumpForce = 3f;
+            JumpForce = 15f;
             AttackDelayInSeconds = 5f;
             MaxHealthPoints = 200f;
         }
@@ -35,8 +37,6 @@ namespace Characters
             base.Update();
 
             Attack();
-
-            ContinuePrimaryAttackIfTouchingGround();
         }
         
         private void Attack()
@@ -58,17 +58,8 @@ namespace Characters
 
         private void PrimaryAttack()
         {
-            Jump();
             m_IsJumpingToPrimaryAttack = true;
-        }
-
-        private void ContinuePrimaryAttackIfTouchingGround()
-        {
-            var isFalling = m_Rb2D.velocity.y < 0;
-            if (m_IsJumpingToPrimaryAttack && IsHittingDown() && isFalling)
-            {
-                FinalisePrimaryAttack();
-            }
+            Jump();
         }
 
         private void FinalisePrimaryAttack()
@@ -110,6 +101,14 @@ namespace Characters
                 projectilePosition, 
                 stalactitePrefab.transform.rotation
             ); 
+        }
+
+        void OnCollisionEnter2D(Collision2D col)
+        {
+            if (m_IsJumpingToPrimaryAttack && col.gameObject.CompareTag("Floor"))
+            {
+                FinalisePrimaryAttack();
+            }
         }
 
         protected override void HandleDeath()

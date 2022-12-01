@@ -22,7 +22,7 @@ public abstract class AbstractCharacter : AbstractSprite
         }
     }
     protected float MaxHealthPoints;
-    protected float JumpForce;
+    protected float JumpForce = 20f;
     
     protected bool CanAttack = true;
     protected float AttackDelayInSeconds;
@@ -40,7 +40,10 @@ public abstract class AbstractCharacter : AbstractSprite
         base.Awake();
         m_GroundLayer = LayerMask.GetMask("Ground");
         SpriteRenderer = GetComponent<SpriteRenderer>();
+        
         m_Rb2D = GetComponent<Rigidbody2D>();
+        m_Rb2D.gravityScale = 6f;
+        
         ResetLife();
     }
     

@@ -12,18 +12,18 @@ namespace Characters
     
     public class Boss3 : AbstractBoss
     {
-        private Vector3 m_MoveDirection = Vector3.right;
+        private Vector3 m_MoveDirection = Vector3.left;
         private float m_ChangeMoveDirectionDelayInSeconds;
-        private bool m_CanChangeMoveDirection;
         
         private LayerMask m_WallLayer;
         private readonly float m_SideHitDistance = 0.1f;
 
+        private const float CollisionBodyAttack = 1f;
         
         protected Boss3()
         {
-            JumpForce = 3f;
-            MovingSpeed = 5f;
+            JumpForce = 15f;
+            MovingSpeed = 4f;
             AttackDelayInSeconds = 5f;
             MaxHealthPoints = 400f;
         }
@@ -43,22 +43,9 @@ namespace Characters
         {
             base.Update();
 
-            // RandomChangeMoveDirection();
             Move(m_MoveDirection);
             
             Attack();
-        }
-
-        private void RandomChangeMoveDirection()
-        {
-            if (!m_CanChangeMoveDirection)
-            {
-                return;
-            }
-            
-            m_MoveDirection = (Random.Range(0f, 1f) > 0.5f) ? Vector3.left : Vector3.right;
-
-            HandleChangeMoveDirectionDone();
         }
 
         private void Attack()
@@ -80,7 +67,7 @@ namespace Characters
         
         private bool IsHittingLeft()
         {
-            var halfSpriteWidth = SpriteRenderer.bounds.size.y/2;
+            var halfSpriteWidth = SpriteRenderer.bounds.size.x/2;
             var leftSpritePosition = transform.position + (Vector3.left * halfSpriteWidth);
         
             var hitLeft = Physics2D.Raycast(
@@ -95,7 +82,7 @@ namespace Characters
         
         private bool IsHittingRight()
         {
-            var halfSpriteWidth = SpriteRenderer.bounds.size.y/2;
+            var halfSpriteWidth = SpriteRenderer.bounds.size.x/2;
             var rightSpritePosition = transform.position + (Vector3.right * halfSpriteWidth);
         
             var hitRight = Physics2D.Raycast(
@@ -110,36 +97,24 @@ namespace Characters
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log("trigger");
             if (IsHittingLeft())
             {
-                Debug.Log("triggerLeft");
-
                 m_MoveDirection = Vector3.right;
             } 
             if(IsHittingRight())
             {
-                Debug.Log("triggerRight");
                 m_MoveDirection = Vector3.left;
             }
-        }
 
+            if (col.gameObject.CompareTag("Hero"))
+            {
+                hero.LooseHp(CollisionBodyAttack);
+            }
+        }
 
         protected override void HandleDeath()
         {
             SceneManager.LoadScene("GameWon");
-        }
-        
-        protected void HandleChangeMoveDirectionDone()
-        {
-            m_CanChangeMoveDirection = false;
-            StartCoroutine(ApplyChangeMoveDirectionDelay());
-        }
-    
-        IEnumerator ApplyChangeMoveDirectionDelay()
-        {
-            yield return new WaitForSeconds(m_ChangeMoveDirectionDelayInSeconds);
-            m_CanChangeMoveDirection = true;
         }
     }
 }
