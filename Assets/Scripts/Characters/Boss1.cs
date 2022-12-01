@@ -12,8 +12,11 @@ namespace Characters
 
         public GameObject chocWavePrefab;
 
+        private bool m_IsJumpingToPrimaryAttack = false;
+
         protected Boss1()
         {
+            JumpForce = 3f;
             SecondaryAttackPoints = 0.5f;
             AttackDelayInSeconds = 5f;
             MaxHealthPoints = 200f;
@@ -34,6 +37,11 @@ namespace Characters
             base.Update();
 
             RandomAttack();
+
+            if (m_IsJumpingToPrimaryAttack && IsHittingDown() && (m_Rb2D.velocity.y < 0))
+            {
+                PrimaryAttackOnTouchingGround();
+            }
         }
 
         protected override void RandomMove()
@@ -57,16 +65,25 @@ namespace Characters
 
         public void PrimaryAttack()
         {
+            Jump();
+            m_IsJumpingToPrimaryAttack = true;
+        }
+
+        public void PrimaryAttackOnTouchingGround()
+        {
+            m_IsJumpingToPrimaryAttack = false;
+            
             Vector3 projectilePosition = new Vector3(
                 transform.position.x,
-                0.5f,
+                1f,
                 transform.position.z
             );
-            var projectile = GameObject.Instantiate(
-                    chocWavePrefab, 
-                    projectilePosition, 
-                    chocWavePrefab.transform.rotation
-                    );
+            
+            GameObject.Instantiate(
+                chocWavePrefab, 
+                projectilePosition, 
+                chocWavePrefab.transform.rotation
+            );
         }
 
         public void SecondaryAttack()

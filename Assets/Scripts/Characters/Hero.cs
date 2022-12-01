@@ -13,10 +13,13 @@ namespace Characters
 
         public Boss1 boss1;
 
+        public bool canShortRangeAttack = true;
+        public bool canLongRangeAttack = true;
+
         protected Hero()
         {
             MovingSpeed = 5f;
-            JumpForce = 6f;
+            JumpForce = 6.5f;
             ShortRangeAttackPoints = 20f;
             AttackDelayInSeconds = 0.5f;
             MaxHealthPoints = 6f;
@@ -38,22 +41,10 @@ namespace Characters
             base.Update();
 
             CheckMove();
+            CheckJump();
             CheckAttack();
         }
-
-        void CheckAttack()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                ShortRangeAttack();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                LongRangeAttack();
-            }
-        }
-
+        
         void CheckMove()
         {
             if (Input.GetKey(KeyCode.RightArrow))
@@ -67,6 +58,27 @@ namespace Characters
             }
         }
 
+        void CheckJump()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Jump();
+            }
+        }
+        
+        void CheckAttack()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                ShortRangeAttack();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                LongRangeAttack();
+            }
+        }
+
         protected override void HandleDeath()
         {
             SceneManager.LoadScene("GameLost");
@@ -74,7 +86,7 @@ namespace Characters
 
         protected void ShortRangeAttack()
         {
-            if (!CanAttack)
+            if (!CanAttack || !canShortRangeAttack)
             {
                 return;
             }
@@ -107,7 +119,7 @@ namespace Characters
 
         protected void LongRangeAttack()
         {
-            if (!CanAttack)
+            if (!CanAttack || !canLongRangeAttack)
             {
                 return;
             }
