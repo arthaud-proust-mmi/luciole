@@ -124,6 +124,7 @@ public abstract class AbstractCharacter : AbstractSprite
         CanAttack = false;
         StartCoroutine(ApplyAttackDelay());
     }
+    
     IEnumerator ApplyAttackDelay()
     {
         yield return new WaitForSeconds(AttackDelayInSeconds);

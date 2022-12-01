@@ -38,11 +38,7 @@ namespace Characters
 
             ContinuePrimaryAttackIfTouchingGround();
         }
-
-        protected override void RandomMove()
-        {
-        }
-
+        
         private void Attack()
         {
             if (!CanAttack)
@@ -118,7 +114,7 @@ namespace Characters
 
         protected override void HandleDeath()
         {
-            SceneManager.LoadScene("GameWon");
+            SceneManager.LoadScene("Level3");
         }
     }
 }

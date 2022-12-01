@@ -8,8 +8,6 @@ public abstract class AbstractBoss : AbstractCharacter
 
     public Characters.Hero hero;
     
-
-    protected abstract void RandomMove();
     
     new void Awake()
     {

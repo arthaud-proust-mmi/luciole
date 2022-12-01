@@ -99,6 +99,7 @@ namespace Characters
 
             foreach (var hitGameObject in hitGameObjectList)
             {
+
                 var characterHit = hitGameObject.collider.gameObject.GetComponent<AbstractCharacter>();
 
                 if (!characterHit)
