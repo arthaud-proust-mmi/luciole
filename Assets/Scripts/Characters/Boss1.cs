@@ -8,16 +8,14 @@ namespace Characters
 {
     public class Boss1 : AbstractBoss
     {
-        protected float PrimaryAttackPoints;
         protected float SecondaryAttackPoints;
 
         public GameObject chocWavePrefab;
 
         protected Boss1()
         {
-            PrimaryAttackPoints = 1f;
             SecondaryAttackPoints = 0.5f;
-            AttackDelayInSeconds = 5;
+            AttackDelayInSeconds = 5f;
             MaxHealthPoints = 200f;
         }
 
