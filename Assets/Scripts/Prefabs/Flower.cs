@@ -6,7 +6,7 @@ namespace Prefabs
 {
     public class Flower: AffectingSprite
     {
-        private float m_FlowerDamage = 5f;
+        private const float FlowerDamage = 5f;
         
         public override bool IsCharacterATarget(AbstractCharacter character)
         {
@@ -15,7 +15,7 @@ namespace Prefabs
 
         public override void AffectTargetCharacter(AbstractCharacter character)
         {
-            character.LooseHp(m_FlowerDamage);
+            character.LooseHp(FlowerDamage);
 
             Destroy(gameObject);
         }

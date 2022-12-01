@@ -53,10 +53,6 @@ public abstract class AbstractCharacter : AbstractSprite
     public new void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Jump();
-        }
     }
 
     public void LooseHp(float hpCountToLoose)

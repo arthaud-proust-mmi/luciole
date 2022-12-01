@@ -8,13 +8,14 @@ namespace Characters
 {
     public class Boss1 : AbstractBoss
     {
-        protected float SecondaryAttackPoints;
-
         public GameObject chocWavePrefab;
+        public GameObject stalactitePrefab;
+
+        private bool m_IsJumpingToPrimaryAttack = false;
 
         protected Boss1()
         {
-            SecondaryAttackPoints = 0.5f;
+            JumpForce = 3f;
             AttackDelayInSeconds = 5f;
             MaxHealthPoints = 200f;
         }
@@ -33,45 +34,86 @@ namespace Characters
         {
             base.Update();
 
-            RandomAttack();
+            Attack();
+
+            ContinuePrimaryAttackIfTouchingGround();
         }
 
         protected override void RandomMove()
         {
         }
 
-        protected override void RandomAttack()
+        private void Attack()
         {
-            if (CanAttack)
+            if (!CanAttack)
             {
-                Debug.Log("Attack hero");
-                PrimaryAttack();
+                return;
+            }
 
-                if (Random.value < 0.5f)
-                {
-                }
+            PrimaryAttack();
 
-                HandleAttackDone();
+            if(Phase == 2)
+            {
+                SecondaryAttack();
+            }
+
+            HandleAttackDone();
+        }
+
+        private void PrimaryAttack()
+        {
+            Jump();
+            m_IsJumpingToPrimaryAttack = true;
+        }
+
+        private void ContinuePrimaryAttackIfTouchingGround()
+        {
+            var isFalling = m_Rb2D.velocity.y < 0;
+            if (m_IsJumpingToPrimaryAttack && IsHittingDown() && isFalling)
+            {
+                FinalisePrimaryAttack();
             }
         }
 
-        public void PrimaryAttack()
+        private void FinalisePrimaryAttack()
         {
+            m_IsJumpingToPrimaryAttack = false;
+            
             Vector3 projectilePosition = new Vector3(
                 transform.position.x,
-                0.5f,
+                0f,
                 transform.position.z
             );
-            var projectile = GameObject.Instantiate(
-                    chocWavePrefab, 
-                    projectilePosition, 
-                    chocWavePrefab.transform.rotation
-                    );
+            
+            GameObject.Instantiate(
+                chocWavePrefab, 
+                projectilePosition, 
+                chocWavePrefab.transform.rotation
+            );
         }
 
-        public void SecondaryAttack()
+        private void SecondaryAttack()
         {
-            hero.LooseHp(SecondaryAttackPoints);
+            
+            for (var x = -15f; x < 15f; x+=2f)
+            {
+                var randomY = Random.Range(11.0f, 14.0f);
+
+                GenerateStalactiteAtPosition(new Vector3(
+                    x,
+                    randomY,
+                    0f
+                ));
+            }
+        }
+
+        private void GenerateStalactiteAtPosition(Vector3 projectilePosition)
+        {
+            GameObject.Instantiate(
+                stalactitePrefab, 
+                projectilePosition, 
+                stalactitePrefab.transform.rotation
+            ); 
         }
 
         protected override void HandleDeath()
