@@ -5,9 +5,11 @@ using UnityEngine;
 public abstract class AbstractSprite : MonoBehaviour
 {
     protected float MovingSpeed = 1f;
+    protected SpriteRenderer SpriteRenderer;
 
     public void Awake()
     {
+        SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void Start()

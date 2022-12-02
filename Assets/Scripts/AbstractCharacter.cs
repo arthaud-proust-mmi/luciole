@@ -22,14 +22,15 @@ public abstract class AbstractCharacter : AbstractSprite
         }
     }
     protected float MaxHealthPoints;
-    protected float JumpForce;
+    public float JumpForce = 20f;
     
     protected bool CanAttack = true;
     protected float AttackDelayInSeconds;
     
-    private LayerMask m_GroundLayer;
+    private LayerMask m_MakeJumpPossibleLayer;
+    
 
-    protected SpriteRenderer SpriteRenderer;
+    protected BoxCollider2D BoxCollider2D;
     protected Rigidbody2D m_Rb2D;
     private readonly float m_BottomHitDistance = 0.1f;
 
@@ -38,9 +39,13 @@ public abstract class AbstractCharacter : AbstractSprite
     public new void Awake()
     {
         base.Awake();
-        m_GroundLayer = LayerMask.GetMask("Ground");
-        SpriteRenderer = GetComponent<SpriteRenderer>();
+        string[] layers = { "Ground", "Platforms" };
+        m_MakeJumpPossibleLayer = LayerMask.GetMask(layers);
+        
+        BoxCollider2D = GetComponent<BoxCollider2D>();
         m_Rb2D = GetComponent<Rigidbody2D>();
+        m_Rb2D.gravityScale = 6f;
+        
         ResetLife();
     }
     
@@ -89,15 +94,19 @@ public abstract class AbstractCharacter : AbstractSprite
     
     public bool IsHittingDown()
     {
-        var halfSpriteHeight = SpriteRenderer.bounds.size.y/2;
-        var bottomSpritePosition = transform.position + (Vector3.down * halfSpriteHeight);
+        var bc2DBounds = BoxCollider2D.bounds;
+        var halfSpriteHeight = bc2DBounds.size.y / 2;
+        var bottomSpritePosition = bc2DBounds.center + (Vector3.down * halfSpriteHeight);
         
         var hitDown = Physics2D.Raycast(
             bottomSpritePosition, 
             Vector2.down, 
             m_BottomHitDistance,
-            m_GroundLayer
+            m_MakeJumpPossibleLayer
         );
+        
+        Debug.DrawRay(bottomSpritePosition, Vector3.down * m_BottomHitDistance);
+
 
         return hitDown.collider;
     }
@@ -124,6 +133,7 @@ public abstract class AbstractCharacter : AbstractSprite
         CanAttack = false;
         StartCoroutine(ApplyAttackDelay());
     }
+    
     IEnumerator ApplyAttackDelay()
     {
         yield return new WaitForSeconds(AttackDelayInSeconds);

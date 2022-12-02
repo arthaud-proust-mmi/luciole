@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Prefabs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,25 +11,24 @@ namespace Characters
         protected float ShortRangeAttackPoints;
         
         public GameObject flowerPrefab;
-
-        public Boss1 boss1;
-
+        
         public bool canShortRangeAttack = true;
         public bool canLongRangeAttack = true;
 
         protected Hero()
         {
             MovingSpeed = 5f;
-            JumpForce = 6f;
+            JumpForce = 25f;
             ShortRangeAttackPoints = 20f;
-            AttackDelayInSeconds = 0.5f;
+//            AttackDelayInSeconds = 1f;
+            AttackDelayInSeconds = 0f;
             MaxHealthPoints = 6f;
         }
 
         new void Awake()
         {
             base.Awake();
-            // boss = GameObject.Find("Boss1").GetComponent<Boss1>();
+            // boss = GameObject.Find("Boss1").GetComponent<AbstractBoss>();
         }
 
         new void Start()
@@ -50,11 +50,27 @@ namespace Characters
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 Move(Vector3.right);
+                SpriteRenderer.flipX = false;
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
+                SpriteRenderer.flipX = true;
                 Move(Vector3.left);
+            }
+            
+            if(m_Rb2D.velocity.x > Mathf.Epsilon)
+            {
+                //Moving Right
+                
+            }
+            else if(m_Rb2D.velocity.x < -Mathf.Epsilon)
+            {
+                //Moving Left
+            }
+            else
+            {
+                //Not moving left or right
             }
         }
 
@@ -68,21 +84,18 @@ namespace Characters
         
         void CheckAttack()
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.C))
             {
                 ShortRangeAttack();
             }
             
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.V))
             {
                 LongRangeAttack();
             }
         }
 
-        protected override void HandleDeath()
-        {
-            SceneManager.LoadScene("GameLost");
-        }
+
 
         protected void ShortRangeAttack()
         {
@@ -99,19 +112,13 @@ namespace Characters
 
             foreach (var hitGameObject in hitGameObjectList)
             {
+
                 var characterHit = hitGameObject.collider.gameObject.GetComponent<AbstractCharacter>();
 
-                if (!characterHit)
+                if (characterHit && characterHit.GetType().IsSubclassOf(typeof(AbstractBoss)))
                 {
-                    continue;
+                    characterHit.LooseHp(ShortRangeAttackPoints);
                 }
-
-                if (characterHit.GetType().Name == "Hero")
-                {
-                    continue;
-                }
-                
-                characterHit.LooseHp(ShortRangeAttackPoints);
             }
 
             HandleAttackDone();
@@ -129,11 +136,23 @@ namespace Characters
 
             var projectile = GameObject.Instantiate(
                 flowerPrefab, 
-                topSpritePosition, 
+                transform.position, 
                 flowerPrefab.transform.rotation
             );
 
+            var projectileClass = projectile.GetComponent<Flower>();
+            
+            projectileClass.Rb2D.velocity = new Vector2(
+                (SpriteRenderer.flipX ? -1 : 1) * 10,
+                2
+            );
+
             HandleAttackDone();
+        }
+        
+        protected override void HandleDeath()
+        {
+            SceneManager.LoadScene("GameLost");
         }
     }
 }
