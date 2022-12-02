@@ -16,9 +16,9 @@ namespace Characters
         private float m_ChangeMoveDirectionDelayInSeconds;
         
         private LayerMask m_WallLayer;
-        private readonly float m_SideHitDistance = 0.1f;
+        private readonly float m_SideHitDistance = 1f;
 
-        private const float CollisionBodyAttack = 1f;
+        private const float AttackPoints = 1f;
         
         protected Boss3()
         {
@@ -43,29 +43,46 @@ namespace Characters
         {
             base.Update();
 
-            Move(m_MoveDirection);
+            ChangeDirectionIfWallCollided();
             
-            Attack();
+            Move(m_MoveDirection);
+
+            if (Phase == 1 && CanAttack)
+            {
+                ShortRangeAttack();
+                HandleAttackDone();
+            }
+            
         }
 
-        private void Attack()
+        private void ChangeDirectionIfWallCollided()
         {
-            if (!CanAttack)
+            if (IsHittingWallLeft())
             {
-                return;
-            }
-
-
-            if(Phase == 2)
+                m_MoveDirection = Vector3.right;
+            } 
+            if(IsHittingWallRight())
             {
-                // todo delete platforms
+                m_MoveDirection = Vector3.left;
             }
+        }
 
-            HandleAttackDone();
+        private void ShortRangeAttack()
+        {
+            var hitGameObjectList = Physics2D.CircleCastAll(
+                transform.position,
+                2f,
+                Vector2.zero
+            );
+
+            foreach (var hitGameObject in hitGameObjectList)
+            {
+                AttackCollided(hitGameObject.collider);
+            }
         }
         
         
-        private bool IsHittingLeft()
+        private bool IsHittingWallLeft()
         {
             var halfSpriteWidth = SpriteRenderer.bounds.size.x/2;
             var leftSpritePosition = transform.position + (Vector3.left * halfSpriteWidth);
@@ -80,7 +97,7 @@ namespace Characters
             return hitLeft.collider;
         }
         
-        private bool IsHittingRight()
+        private bool IsHittingWallRight()
         {
             var halfSpriteWidth = SpriteRenderer.bounds.size.x/2;
             var rightSpritePosition = transform.position + (Vector3.right * halfSpriteWidth);
@@ -97,18 +114,18 @@ namespace Characters
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (IsHittingLeft())
+            if (Phase == 2)
             {
-                m_MoveDirection = Vector3.right;
-            } 
-            if(IsHittingRight())
-            {
-                m_MoveDirection = Vector3.left;
+                AttackCollided(col);
             }
+        }
 
-            if (col.gameObject.CompareTag("Hero"))
+        private void AttackCollided(Collider2D col)
+        {
+            var characterHit = col.gameObject.GetComponent<AbstractCharacter>();
+            if (characterHit && characterHit.GetType() == typeof(Hero))
             {
-                hero.LooseHp(CollisionBodyAttack);
+                hero.LooseHp(AttackPoints);
             }
         }
 

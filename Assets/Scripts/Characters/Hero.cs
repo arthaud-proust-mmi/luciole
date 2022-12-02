@@ -21,7 +21,7 @@ namespace Characters
             MovingSpeed = 5f;
             JumpForce = 25f;
             ShortRangeAttackPoints = 20f;
-            AttackDelayInSeconds = 0.5f;
+            AttackDelayInSeconds = 1f;
             MaxHealthPoints = 6f;
         }
 
@@ -102,17 +102,10 @@ namespace Characters
 
                 var characterHit = hitGameObject.collider.gameObject.GetComponent<AbstractCharacter>();
 
-                if (!characterHit)
+                if (characterHit && characterHit.GetType().IsSubclassOf(typeof(AbstractBoss)))
                 {
-                    continue;
+                    characterHit.LooseHp(ShortRangeAttackPoints);
                 }
-
-                if (characterHit.GetType().Name == "Hero")
-                {
-                    continue;
-                }
-                
-                characterHit.LooseHp(ShortRangeAttackPoints);
             }
 
             HandleAttackDone();

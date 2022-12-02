@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 269094588}
   - component: {fileID: 269094587}
   - component: {fileID: 269094586}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: BigPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 365290225}
   - component: {fileID: 365290224}
   - component: {fileID: 365290223}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SmallPlatform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -691,7 +691,7 @@ MonoBehaviour:
   flowerPrefab: {fileID: 6918548076063735438, guid: d2f81ffed3a0d48d198d4f1181ae3cd8, type: 3}
   boss1: {fileID: 0}
   canShortRangeAttack: 1
-  canLongRangeAttack: 0
+  canLongRangeAttack: 1
 --- !u!61 &542099495
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -801,7 +801,7 @@ GameObject:
   - component: {fileID: 742813020}
   - component: {fileID: 742813019}
   - component: {fileID: 742813018}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SmallPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1120,7 +1120,7 @@ GameObject:
   - component: {fileID: 1081890607}
   - component: {fileID: 1081890606}
   - component: {fileID: 1081890605}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SmallPlatform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1626,7 +1626,7 @@ GameObject:
   - component: {fileID: 1677119901}
   - component: {fileID: 1677119900}
   - component: {fileID: 1677119899}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SmallPlatform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

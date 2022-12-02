@@ -10,7 +10,7 @@ namespace Prefabs
         
         public override bool IsCharacterATarget(AbstractCharacter character)
         {
-            return character.GetType().Name == "Boss1";
+            return character.GetType().IsSubclassOf(typeof(AbstractBoss));
         }
 
         public override void AffectTargetCharacter(AbstractCharacter character)

@@ -9,7 +9,7 @@ namespace Prefabs
         private const float ChocWaveDamage = 1f;
         public override bool IsCharacterATarget(AbstractCharacter character)
         {
-            return character.GetType().Name == "Hero";
+            return character.GetType() == typeof(Hero);
         }
 
         public override void AffectTargetCharacter(AbstractCharacter character)

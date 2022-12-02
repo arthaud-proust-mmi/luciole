@@ -27,7 +27,8 @@ public abstract class AbstractCharacter : AbstractSprite
     protected bool CanAttack = true;
     protected float AttackDelayInSeconds;
     
-    private LayerMask m_GroundLayer;
+    private LayerMask m_MakeJumpPossibleLayer;
+    
 
     protected SpriteRenderer SpriteRenderer;
     protected Rigidbody2D m_Rb2D;
@@ -38,7 +39,9 @@ public abstract class AbstractCharacter : AbstractSprite
     public new void Awake()
     {
         base.Awake();
-        m_GroundLayer = LayerMask.GetMask("Ground");
+        string[] layers = { "Ground", "Platforms" };
+        m_MakeJumpPossibleLayer = LayerMask.GetMask(layers);
+        
         SpriteRenderer = GetComponent<SpriteRenderer>();
         
         m_Rb2D = GetComponent<Rigidbody2D>();
@@ -99,7 +102,7 @@ public abstract class AbstractCharacter : AbstractSprite
             bottomSpritePosition, 
             Vector2.down, 
             m_BottomHitDistance,
-            m_GroundLayer
+            m_MakeJumpPossibleLayer
         );
 
         return hitDown.collider;

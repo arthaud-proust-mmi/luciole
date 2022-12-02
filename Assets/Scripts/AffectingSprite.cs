@@ -53,7 +53,7 @@ public abstract class AffectingSprite: AbstractSprite
     private void HandleTriggerWithCharacter(Collider2D col)
     {
         var character = col.gameObject.GetComponent<AbstractCharacter>();
-        if (IsCharacterATarget(character))
+        if (character && IsCharacterATarget(character))
         {
             AffectTargetCharacter(character);
         } 
