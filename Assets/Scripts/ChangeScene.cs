@@ -5,24 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    
-    public string SceneNametoLoad;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-   public void changeScene () { 
-       SceneManager.LoadScene(SceneNametoLoad);
-   }
-   
-   public void ChangeToCreditsScreen () { 
+    public void ChangeToCreditsScreen () { 
        SceneManager.LoadScene("Credits");
    }
    
-   public void ChangeToGameStarting () { 
-       SceneManager.LoadScene("GameStarting");
+   public void ChangeToHome () { 
+          SceneManager.LoadScene("Home");
+      }
+   
+   public void ChangeToGameStart () { 
+       SceneManager.LoadScene("GameStart");
    }
    
    public void ChangeToGameHelp () { 
@@ -31,5 +23,9 @@ public class ChangeScene : MonoBehaviour
    
    public void ChangeToLevel1 () { 
        SceneManager.LoadScene("Level1");
+   }
+   
+   public void ChangeToLevel3 () { 
+       SceneManager.LoadScene("Level3");
    }
 }

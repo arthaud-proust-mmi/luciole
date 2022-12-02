@@ -113,7 +113,7 @@ namespace Characters
 
         protected override void HandleDeath()
         {
-            SceneManager.LoadScene("Level3");
+            SceneManager.LoadScene("Level1Won");
         }
     }
 }
