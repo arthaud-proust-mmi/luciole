@@ -15,7 +15,6 @@ namespace Characters
         public bool canShortRangeAttack = true;
         public bool canLongRangeAttack = true;
 
-        protected CharacterController CharacterController;
         protected Animator Animator;
         
         protected Hero()
@@ -30,7 +29,6 @@ namespace Characters
         new void Awake()
         {
             base.Awake();
-            CharacterController = GetComponent<CharacterController>();
             Animator = GetComponent<Animator>();
             // boss = GameObject.Find("Boss1").GetComponent<AbstractBoss>();
         }
@@ -54,27 +52,11 @@ namespace Characters
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 Move(Vector3.right);
-                SpriteRenderer.flipX = false;
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                SpriteRenderer.flipX = true;
                 Move(Vector3.left);
-            }
-            
-            if(m_Rb2D.velocity.x > Mathf.Epsilon)
-            {
-                //Moving Right
-                
-            }
-            else if(m_Rb2D.velocity.x < -Mathf.Epsilon)
-            {
-                //Moving Left
-            }
-            else
-            {
-                //Not moving left or right
             }
         }
 

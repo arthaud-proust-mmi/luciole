@@ -1957,6 +1957,7 @@ GameObject:
   - component: {fileID: 1907196419}
   - component: {fileID: 1907196418}
   - component: {fileID: 1907196417}
+  - component: {fileID: 1907196422}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Boss
@@ -2017,8 +2018,8 @@ BoxCollider2D:
   m_Offset: {x: 1.7474744, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 16, y: 14.19}
+    pivot: {x: 0.4631548, y: 0.5}
+    oldSize: {x: 16.011637, y: 14.190001}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2067,7 +2068,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ef45f7a37440647bda15659ccf29cc84, type: 3}
+  m_Sprite: {fileID: 675151256554756322, guid: 8f3ad822c9306420297e8bcb0e8c4d17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2092,6 +2093,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1907196422
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907196416}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0ddd6d077f0a4fb8bfa4053a2761846, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1912526764
 GameObject:
   m_ObjectHideFlags: 0

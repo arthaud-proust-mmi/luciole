@@ -22,8 +22,10 @@ public abstract class AbstractSprite : MonoBehaviour
         
     }
     
-    public void Move(Vector3 directionVector)
+    public virtual void Move(Vector3 directionVector)
     {
+        SpriteRenderer.flipX = directionVector.x < 0;
+
         transform.position += Time.deltaTime * MovingSpeed * directionVector;
     }
 }
