@@ -22,7 +22,7 @@ public abstract class AbstractCharacter : AbstractSprite
         }
     }
     protected float MaxHealthPoints;
-    protected float JumpForce = 20f;
+    public float JumpForce = 20f;
     
     protected bool CanAttack = true;
     protected float AttackDelayInSeconds;

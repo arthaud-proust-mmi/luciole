@@ -63,3 +63,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+Exports/
+
+.DS_Store

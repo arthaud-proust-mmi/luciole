@@ -13,8 +13,19 @@ public class ChangeScene : MonoBehaviour
         
     }
 
-   public void changeScene () {
-   SceneManager.LoadScene(SceneNametoLoad);
-
-    }
+   public void changeScene () { 
+       SceneManager.LoadScene(SceneNametoLoad);
+   }
+   
+   public void ChangeToCreditsScreen () { 
+       SceneManager.LoadScene("Credits");
+   }
+   
+   public void ChangeToGameStartingScreen () { 
+       SceneManager.LoadScene("GameStarting");
+   }
+   
+   public void ChangeToLevel1 () { 
+       SceneManager.LoadScene("Level1");
+   }
 }
