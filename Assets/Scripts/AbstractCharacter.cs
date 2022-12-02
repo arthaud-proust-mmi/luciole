@@ -75,6 +75,7 @@ public abstract class AbstractCharacter : AbstractSprite
         }
         else
         {
+            BlinkSprite();
             HandleHpLost();
         }
     }
@@ -114,6 +115,36 @@ public abstract class AbstractCharacter : AbstractSprite
     public bool IsDead()
     {
         return HealthPoints <= 0;
+    }
+
+    protected void BlinkSprite()
+    {
+        StartCoroutine(AnimateBlinkSprite());
+    }
+    
+    IEnumerator AnimateBlinkSprite()
+    {
+        float maxA = 1f;
+        float minA = 0.2f;
+        float stepA = 0.1f;
+        float intervalTime = 0.01f;
+
+        for (int i = 0; i < 4; i++)
+        {
+            for(var j=maxA; j>minA; j-=stepA)
+            {
+                SpriteRenderer.color = new Color(1, 1, 1, j);
+                yield return new WaitForSeconds(intervalTime);
+            }
+            for(var j=minA; j<maxA; j+=stepA)
+            {
+                SpriteRenderer.color = new Color(1, 1, 1, j);
+                yield return new WaitForSeconds(intervalTime);
+            }
+        }
+        
+       
+        SpriteRenderer.color = new Color(1, 1, 1, 1);
     }
     
     protected virtual void HandleHpLost()

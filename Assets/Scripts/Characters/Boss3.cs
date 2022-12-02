@@ -26,7 +26,7 @@ namespace Characters
         {
             JumpForce = 15f;
             MovingSpeed = 4f;
-            AttackDelayInSeconds = 5f;
+            AttackDelayInSeconds = 3f;
             MaxHealthPoints = 400f;
         }
 
