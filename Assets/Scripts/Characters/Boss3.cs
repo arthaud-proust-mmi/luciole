@@ -52,7 +52,6 @@ namespace Characters
 
             if (Phase == 1 && CanAttack)
             {
-                Animator.SetBool("IsAttacking", true);
                 ShortRangeAttack();
                 HandleAttackDone();
             }
@@ -147,7 +146,8 @@ namespace Characters
         protected override void HandleAttackDone()
         {
             CanAttack = false;
-            Animator.SetBool("IsAttacking", false);
+            Animator.SetBool("IsAttacking", true);
+            StartCoroutine(ApplyDoingAttackDelay());
             StartCoroutine(ApplyAttackDelay());
         }
      
@@ -155,6 +155,12 @@ namespace Characters
         {
             yield return new WaitForSeconds(AttackDelayInSeconds);
             CanAttack = true;
+        }
+        
+        protected IEnumerator ApplyDoingAttackDelay()
+        {
+            yield return new WaitForSeconds(0.2f);
+            Animator.SetBool("IsAttacking", false);
         }
     }
 }
