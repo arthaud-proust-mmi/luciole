@@ -128,13 +128,13 @@ public abstract class AbstractCharacter : AbstractSprite
         Debug.LogWarning($"Character {className} dead, not handled");
     }
     
-    protected void HandleAttackDone()
+    protected virtual void HandleAttackDone()
     {
         CanAttack = false;
         StartCoroutine(ApplyAttackDelay());
     }
     
-    IEnumerator ApplyAttackDelay()
+    protected virtual IEnumerator ApplyAttackDelay()
     {
         yield return new WaitForSeconds(AttackDelayInSeconds);
         CanAttack = true;

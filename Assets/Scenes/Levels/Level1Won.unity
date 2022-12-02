@@ -264,7 +264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00001049, y: -116.3}
+  m_AnchoredPosition: {x: 0.00019296, y: -117.2}
   m_SizeDelta: {x: 108.3593, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &170453510
@@ -513,8 +513,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00017802, y: 7.4}
-  m_SizeDelta: {x: 326.7798, y: 63.9406}
+  m_AnchoredPosition: {x: -0.0000038147, y: 0.00023365}
+  m_SizeDelta: {x: 346.4467, y: 61.1173}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &924952529
 MonoBehaviour:
@@ -536,8 +536,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tu as pass\xE9 l'\xE9tape du Choc, selon K\xFCbler-Ross.\nTu as d\xE9bloqu\xE9
-    l'attaque \xE0 distance en r\xE9cup\xE9rant la Chrysanth\xE8me."
+  m_text: "Synonyme d\u2019\xE9ternit\xE9, il est associ\xE9 aux grandes \xE9tapes
+    de la vie et une douleur insupportable face \xE0 l\u2019id\xE9e de perdre un
+    \xEAtre cher."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e5a8f60aaa4849c8bbe533c68859614, type: 2}
   m_sharedMaterial: {fileID: 2591497481663233657, guid: 3e5a8f60aaa4849c8bbe533c68859614, type: 2}
@@ -648,7 +649,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 32.8, y: -59.4}
+  m_AnchoredPosition: {x: 31.0666, y: -64.50001}
   m_SizeDelta: {x: 150.5755, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1046662054
@@ -857,8 +858,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00017802, y: 68.1}
-  m_SizeDelta: {x: 177.8615, y: 33.9073}
+  m_AnchoredPosition: {x: -0.0000076294, y: 64.3}
+  m_SizeDelta: {x: 255.6747, y: 34.7624}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1193652835
 MonoBehaviour:
@@ -880,7 +881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Bien jou\xE9 !"
+  m_text: "Le chrysanth\xE8me violet"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 68073cf3b5c024c8fa3c4e22270f47a0, type: 2}
   m_sharedMaterial: {fileID: -1558264406212016514, guid: 68073cf3b5c024c8fa3c4e22270f47a0, type: 2}
@@ -1057,7 +1058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -69.06662, y: -59.399986}
+  m_AnchoredPosition: {x: -70.8, y: -64.5}
   m_SizeDelta: {x: 24.1758, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1768897797

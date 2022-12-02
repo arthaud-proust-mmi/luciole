@@ -15,19 +15,23 @@ namespace Characters
         public bool canShortRangeAttack = true;
         public bool canLongRangeAttack = true;
 
+        protected CharacterController CharacterController;
+        protected Animator Animator;
+        
         protected Hero()
         {
             MovingSpeed = 5f;
             JumpForce = 25f;
             ShortRangeAttackPoints = 20f;
-//            AttackDelayInSeconds = 1f;
-            AttackDelayInSeconds = 0f;
+            AttackDelayInSeconds = 0.3f;
             MaxHealthPoints = 6f;
         }
 
         new void Awake()
         {
             base.Awake();
+            CharacterController = GetComponent<CharacterController>();
+            Animator = GetComponent<Animator>();
             // boss = GameObject.Find("Boss1").GetComponent<AbstractBoss>();
         }
 
@@ -153,6 +157,20 @@ namespace Characters
         protected override void HandleDeath()
         {
             SceneManager.LoadScene("GameLost");
+        }
+
+        protected override void HandleAttackDone()
+        {
+            CanAttack = false;
+            Animator.SetBool("IsAttacking", true);
+            StartCoroutine(ApplyAttackDelay());
+        }
+     
+        protected override IEnumerator ApplyAttackDelay()
+        {
+            yield return new WaitForSeconds(AttackDelayInSeconds);
+            CanAttack = true;
+            Animator.SetBool("IsAttacking", false);
         }
     }
 }
