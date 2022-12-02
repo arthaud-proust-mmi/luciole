@@ -30,7 +30,6 @@ public abstract class AbstractCharacter : AbstractSprite
     private LayerMask m_MakeJumpPossibleLayer;
     
 
-    protected SpriteRenderer SpriteRenderer;
     protected BoxCollider2D BoxCollider2D;
     protected Rigidbody2D m_Rb2D;
     private readonly float m_BottomHitDistance = 0.1f;
@@ -43,7 +42,6 @@ public abstract class AbstractCharacter : AbstractSprite
         string[] layers = { "Ground", "Platforms" };
         m_MakeJumpPossibleLayer = LayerMask.GetMask(layers);
         
-        SpriteRenderer = GetComponent<SpriteRenderer>();
         BoxCollider2D = GetComponent<BoxCollider2D>();
         m_Rb2D = GetComponent<Rigidbody2D>();
         m_Rb2D.gravityScale = 6f;

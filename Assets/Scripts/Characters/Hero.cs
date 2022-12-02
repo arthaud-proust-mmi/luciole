@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Prefabs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +20,8 @@ namespace Characters
             MovingSpeed = 5f;
             JumpForce = 25f;
             ShortRangeAttackPoints = 20f;
-            AttackDelayInSeconds = 1f;
+//            AttackDelayInSeconds = 1f;
+            AttackDelayInSeconds = 0f;
             MaxHealthPoints = 6f;
         }
 
@@ -48,11 +50,27 @@ namespace Characters
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 Move(Vector3.right);
+                SpriteRenderer.flipX = false;
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
+                SpriteRenderer.flipX = true;
                 Move(Vector3.left);
+            }
+            
+            if(m_Rb2D.velocity.x > Mathf.Epsilon)
+            {
+                //Moving Right
+                
+            }
+            else if(m_Rb2D.velocity.x < -Mathf.Epsilon)
+            {
+                //Moving Left
+            }
+            else
+            {
+                //Not moving left or right
             }
         }
 
@@ -77,10 +95,7 @@ namespace Characters
             }
         }
 
-        protected override void HandleDeath()
-        {
-            SceneManager.LoadScene("GameLost");
-        }
+
 
         protected void ShortRangeAttack()
         {
@@ -125,7 +140,19 @@ namespace Characters
                 flowerPrefab.transform.rotation
             );
 
+            var projectileClass = projectile.GetComponent<Flower>();
+            
+            projectileClass.m_Rb2D.velocity = new Vector2(
+                (SpriteRenderer.flipX ? -1 : 1) * 8,
+                4
+            );
+
             HandleAttackDone();
+        }
+        
+        protected override void HandleDeath()
+        {
+            SceneManager.LoadScene("GameLost");
         }
     }
 }
