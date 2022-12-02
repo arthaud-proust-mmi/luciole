@@ -110,10 +110,5 @@ namespace Characters
                 FinalisePrimaryAttack();
             }
         }
-
-        protected override void HandleDeath()
-        {
-            SceneManager.LoadScene("Level1Won");
-        }
     }
 }

@@ -10,7 +10,7 @@ public abstract class AffectingSprite: AbstractSprite
     public bool destroyOnWall = false;
     public bool destroyOnGround = false;
 
-    public Rigidbody2D m_Rb2D;
+    public Rigidbody2D Rb2D;
 
     public abstract bool IsCharacterATarget(AbstractCharacter character);
 
@@ -19,13 +19,13 @@ public abstract class AffectingSprite: AbstractSprite
     public new void Awake()
     {
         base.Awake();
-        m_Rb2D = GetComponent<Rigidbody2D>();
+        Rb2D = GetComponent<Rigidbody2D>();
+        Rb2D.velocity = startingVelocity;
     }
     
     public new void Start()
     {
         base.Start();
-        //m_Rb2D.velocity = startingVelocity;
     }
 
     public new void Update()

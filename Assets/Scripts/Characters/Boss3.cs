@@ -134,10 +134,5 @@ namespace Characters
                 hero.LooseHp(AttackPoints);
             }
         }
-
-        protected override void HandleDeath()
-        {
-            SceneManager.LoadScene("GameWon");
-        }
     }
 }

@@ -537,7 +537,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Tu as pass\xE9 l'\xE9tape du Choc, selon K\xFCbler-Ross.\nTu as d\xE9bloqu\xE9
-    l'attauqe \xE0 distance en r\xE9cup\xE9rant la Chrysanth\xE8me."
+    l'attaque \xE0 distance en r\xE9cup\xE9rant la Chrysanth\xE8me."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e5a8f60aaa4849c8bbe533c68859614, type: 2}
   m_sharedMaterial: {fileID: 2591497481663233657, guid: 3e5a8f60aaa4849c8bbe533c68859614, type: 2}

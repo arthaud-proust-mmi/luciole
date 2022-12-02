@@ -687,6 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e05b8286c3a44e449715c5fa38d9ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpForce: 25
   hpText: {fileID: 1836574268}
   flowerPrefab: {fileID: 6918548076063735438, guid: d2f81ffed3a0d48d198d4f1181ae3cd8, type: 3}
   canShortRangeAttack: 1
@@ -1955,8 +1956,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d88cfa33130c411bb1fcc9a34178cf2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpForce: 15
   hpText: {fileID: 1912526766}
   hero: {fileID: 542099494}
+  dropFlowerPrefab: {fileID: 2726023761624911588, guid: 02808892a8fdd4af99e078fe80bfaccf, type: 3}
 --- !u!50 &1907196418
 Rigidbody2D:
   serializedVersion: 4

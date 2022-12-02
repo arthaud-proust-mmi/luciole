@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Prefabs;
 using UnityEngine;
 
 public abstract class AbstractBoss : AbstractCharacter
@@ -7,7 +8,7 @@ public abstract class AbstractBoss : AbstractCharacter
     protected int Phase = 1;
 
     public Characters.Hero hero;
-    
+    public GameObject dropFlowerPrefab;
     
     new void Awake()
     {
@@ -33,6 +34,21 @@ public abstract class AbstractBoss : AbstractCharacter
         }
     }
     
+    protected void DropFlower()
+    {
+        var flowerPosition = new Vector3(
+            transform.position.x,
+            1f,
+            transform.position.z
+        );
+        
+        Instantiate(
+            dropFlowerPrefab,
+            flowerPosition,
+            dropFlowerPrefab.transform.rotation
+        );
+    }
+    
     protected override void HandleHpLost()
     {
         BeginPhaseTwoIfUnderHalfLife();
@@ -42,5 +58,6 @@ public abstract class AbstractBoss : AbstractCharacter
     {
         Destroy(gameObject);
         Destroy(hpText);
+        DropFlower();
     }
 }

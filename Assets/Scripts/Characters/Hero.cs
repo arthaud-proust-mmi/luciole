@@ -136,15 +136,15 @@ namespace Characters
 
             var projectile = GameObject.Instantiate(
                 flowerPrefab, 
-                topSpritePosition, 
+                transform.position, 
                 flowerPrefab.transform.rotation
             );
 
             var projectileClass = projectile.GetComponent<Flower>();
             
-            projectileClass.m_Rb2D.velocity = new Vector2(
-                (SpriteRenderer.flipX ? -1 : 1) * 8,
-                4
+            projectileClass.Rb2D.velocity = new Vector2(
+                (SpriteRenderer.flipX ? -1 : 1) * 10,
+                2
             );
 
             HandleAttackDone();
