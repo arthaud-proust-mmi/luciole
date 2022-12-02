@@ -16,7 +16,7 @@ namespace Characters
         private float m_ChangeMoveDirectionDelayInSeconds;
         
         private LayerMask m_WallLayer;
-        private readonly float m_SideHitDistance = 1f;
+        private readonly float m_SideHitDistance = 0.1f;
 
         private const float AttackPoints = 1f;
         
@@ -84,8 +84,9 @@ namespace Characters
         
         private bool IsHittingWallLeft()
         {
-            var halfSpriteWidth = SpriteRenderer.bounds.size.x/2;
-            var leftSpritePosition = transform.position + (Vector3.left * halfSpriteWidth);
+            var bc2DBounds = BoxCollider2D.bounds;
+            var halfSpriteWidth = bc2DBounds.size.x/2;
+            var leftSpritePosition = bc2DBounds.center + (Vector3.left * halfSpriteWidth);
         
             var hitLeft = Physics2D.Raycast(
                 leftSpritePosition, 
@@ -93,21 +94,26 @@ namespace Characters
                 m_SideHitDistance,
                 m_WallLayer
             );
+            
+            Debug.DrawRay(leftSpritePosition, Vector3.left * m_SideHitDistance);
 
             return hitLeft.collider;
         }
         
         private bool IsHittingWallRight()
         {
-            var halfSpriteWidth = SpriteRenderer.bounds.size.x/2;
-            var rightSpritePosition = transform.position + (Vector3.right * halfSpriteWidth);
-        
+            var bc2DBounds = BoxCollider2D.bounds;
+            var halfSpriteWidth = bc2DBounds.size.x/2;
+            var rightSpritePosition = bc2DBounds.center + (Vector3.right * halfSpriteWidth);
             var hitRight = Physics2D.Raycast(
                 rightSpritePosition, 
                 Vector2.right, 
                 m_SideHitDistance,
                 m_WallLayer
             );
+            
+            Debug.DrawRay(rightSpritePosition, Vector3.right * m_SideHitDistance);
+
 
             return hitRight.collider;
         }

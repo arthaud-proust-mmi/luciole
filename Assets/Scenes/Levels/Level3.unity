@@ -689,7 +689,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpText: {fileID: 1836574268}
   flowerPrefab: {fileID: 6918548076063735438, guid: d2f81ffed3a0d48d198d4f1181ae3cd8, type: 3}
-  boss1: {fileID: 0}
   canShortRangeAttack: 1
   canLongRangeAttack: 1
 --- !u!61 &542099495

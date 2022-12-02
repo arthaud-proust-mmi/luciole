@@ -12,7 +12,6 @@ public abstract class AbstractBoss : AbstractCharacter
     new void Awake()
     {
         base.Awake();
-        // Hero = GameObject.FindWithTag("Hero").GetComponent<Hero>();
     }
     
     new void Start()

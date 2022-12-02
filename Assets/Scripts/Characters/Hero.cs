@@ -10,9 +10,7 @@ namespace Characters
         protected float ShortRangeAttackPoints;
         
         public GameObject flowerPrefab;
-
-        public Boss1 boss1;
-
+        
         public bool canShortRangeAttack = true;
         public bool canLongRangeAttack = true;
 
@@ -28,7 +26,7 @@ namespace Characters
         new void Awake()
         {
             base.Awake();
-            // boss = GameObject.Find("Boss1").GetComponent<Boss1>();
+            // boss = GameObject.Find("Boss1").GetComponent<AbstractBoss>();
         }
 
         new void Start()
