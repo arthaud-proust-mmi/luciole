@@ -21,8 +21,12 @@ public class ChangeScene : MonoBehaviour
        SceneManager.LoadScene("Credits");
    }
    
-   public void ChangeToGameStartingScreen () { 
+   public void ChangeToGameStarting () { 
        SceneManager.LoadScene("GameStarting");
+   }
+   
+   public void ChangeToGameHelp () { 
+       SceneManager.LoadScene("GameHelp");
    }
    
    public void ChangeToLevel1 () { 

@@ -475,7 +475,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 784405242}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: ChangeToGameStartingScreen
+        m_MethodName: ChangeToGameStarting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
