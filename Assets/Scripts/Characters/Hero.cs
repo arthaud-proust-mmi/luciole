@@ -15,19 +15,21 @@ namespace Characters
         public bool canShortRangeAttack = true;
         public bool canLongRangeAttack = true;
 
+        protected Animator Animator;
+        
         protected Hero()
         {
             MovingSpeed = 5f;
             JumpForce = 25f;
             ShortRangeAttackPoints = 20f;
-//            AttackDelayInSeconds = 1f;
-            AttackDelayInSeconds = 0f;
+            AttackDelayInSeconds = 0.3f;
             MaxHealthPoints = 6f;
         }
 
         new void Awake()
         {
             base.Awake();
+            Animator = GetComponent<Animator>();
             // boss = GameObject.Find("Boss1").GetComponent<AbstractBoss>();
         }
 
@@ -50,27 +52,11 @@ namespace Characters
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 Move(Vector3.right);
-                SpriteRenderer.flipX = false;
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                SpriteRenderer.flipX = true;
                 Move(Vector3.left);
-            }
-            
-            if(m_Rb2D.velocity.x > Mathf.Epsilon)
-            {
-                //Moving Right
-                
-            }
-            else if(m_Rb2D.velocity.x < -Mathf.Epsilon)
-            {
-                //Moving Left
-            }
-            else
-            {
-                //Not moving left or right
             }
         }
 
@@ -153,6 +139,20 @@ namespace Characters
         protected override void HandleDeath()
         {
             SceneManager.LoadScene("GameLost");
+        }
+
+        protected override void HandleAttackDone()
+        {
+            CanAttack = false;
+            Animator.SetBool("IsAttacking", true);
+            StartCoroutine(ApplyAttackDelay());
+        }
+     
+        protected override IEnumerator ApplyAttackDelay()
+        {
+            yield return new WaitForSeconds(AttackDelayInSeconds);
+            CanAttack = true;
+            Animator.SetBool("IsAttacking", false);
         }
     }
 }

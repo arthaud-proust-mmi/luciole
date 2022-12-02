@@ -24,12 +24,20 @@ public abstract class AbstractBoss : AbstractCharacter
     {
         base.Update();
     }
+    
+    public override void Move(Vector3 directionVector)
+    {
+        SpriteRenderer.flipX = directionVector.x > 0;
+
+        transform.position += Time.deltaTime * MovingSpeed * directionVector;
+    }
 
     private void BeginPhaseTwoIfUnderHalfLife()
     {
         if (Phase == 1 && HealthPoints < MaxHealthPoints / 2)
         {
             Phase = 2;
+            HandlePhaseTwoBegan();
             Debug.Log("Phase 2 started");
         }
     }
@@ -47,6 +55,11 @@ public abstract class AbstractBoss : AbstractCharacter
             flowerPosition,
             dropFlowerPrefab.transform.rotation
         );
+    }
+
+    protected virtual void HandlePhaseTwoBegan()
+    {
+        
     }
     
     protected override void HandleHpLost()

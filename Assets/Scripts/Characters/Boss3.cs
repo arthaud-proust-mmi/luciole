@@ -20,11 +20,13 @@ namespace Characters
 
         private const float AttackPoints = 1f;
         
+        protected Animator Animator;
+        
         protected Boss3()
         {
             JumpForce = 15f;
             MovingSpeed = 4f;
-            AttackDelayInSeconds = 5f;
+            AttackDelayInSeconds = 3f;
             MaxHealthPoints = 400f;
         }
 
@@ -32,6 +34,7 @@ namespace Characters
         {
             base.Awake();
             m_WallLayer = LayerMask.GetMask("Walls");
+            Animator = GetComponent<Animator>();
         }
 
         new void Start()
@@ -133,6 +136,31 @@ namespace Characters
             {
                 hero.LooseHp(AttackPoints);
             }
+        }
+
+        protected override void HandlePhaseTwoBegan()
+        {
+            Animator.SetBool("IsAngry", true);
+        }
+        
+        protected override void HandleAttackDone()
+        {
+            CanAttack = false;
+            Animator.SetBool("IsAttacking", true);
+            StartCoroutine(ApplyDoingAttackDelay());
+            StartCoroutine(ApplyAttackDelay());
+        }
+     
+        protected override IEnumerator ApplyAttackDelay()
+        {
+            yield return new WaitForSeconds(AttackDelayInSeconds);
+            CanAttack = true;
+        }
+        
+        protected IEnumerator ApplyDoingAttackDelay()
+        {
+            yield return new WaitForSeconds(0.2f);
+            Animator.SetBool("IsAttacking", false);
         }
     }
 }
